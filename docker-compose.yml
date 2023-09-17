@@ -8,5 +8,9 @@ services:
     volumes:
       - ./events.js:/docker-entrypoint-initdb.d/events.js
     container_name: events-mongodb
+  mongo_seed:
+    build: mongo-seed/.
+    links:
+      - mongodb
 volumes:
   mongodb:
