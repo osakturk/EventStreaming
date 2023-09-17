@@ -1,14 +1,10 @@
 package com.event.stream
 
-import com.event.stream.constant.Constants.ORDER_SUCCESSFUL_MESSAGE
 import com.event.stream.dto.Data
 import com.event.stream.dto.StreamingResponseDTO
 import com.event.stream.model.Event
 import com.event.stream.model.Show
 import com.event.stream.model.User
-import java.time.Instant
-import java.time.temporal.ChronoUnit
-import java.util.*
 
 object TestFactory {
     fun getEvent() = Event("eventId",123L, "stream-started", "showId", "sytflix", "evendate")
