@@ -4,10 +4,12 @@ import com.event.stream.dto.Data
 import com.event.stream.dto.StreamingResponseDTO
 import com.event.stream.model.Event
 import com.event.stream.model.Show
+import com.event.stream.model.TimezoneInfo
 import com.event.stream.model.User
+import java.time.Instant
 
 object TestFactory {
-    fun getEvent() = Event("eventId",123L, "stream-started", "showId", "sytflix", "evendate")
+    fun getEvent() = Event("eventId",123L, "stream-started", "showId", "sytflix", Instant.now())
     fun getEventList() = arrayListOf(getEvent())
 
     fun getShow() = Show("id","showId","cast", "country","dateAdded","description","director","duration","listedIn",
@@ -50,4 +52,8 @@ object TestFactory {
             "    \"last_name\": \"Beeton\"\n" +
             "  }\n" +
             "}"
+
+    fun getTimezoneInfo() = TimezoneInfo("id","CI","Ivory Coast","Africa/Abidjan",0, 1694975137)
+
+    fun getTimezoneList() = arrayListOf(getTimezoneInfo())
 }

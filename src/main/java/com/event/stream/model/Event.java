@@ -3,6 +3,7 @@ package com.event.stream.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.Instant;
 import java.util.UUID;
 
 @Document
@@ -14,12 +15,12 @@ public class Event {
     private String eventDescription;
     private String showId;
     private String platform;
-    private String eventDate;
+    private Instant eventDate;
 
     public Event() {
     }
 
-    public Event(String eventId, Long userId, String eventDescription, String showId, String platform, String eventDate) {
+    public Event(String eventId, Long userId, String eventDescription, String showId, String platform, Instant eventDate) {
         this.id = UUID.randomUUID().toString();
         this.eventId = eventId;
         this.userId = userId;
@@ -77,11 +78,11 @@ public class Event {
         this.platform = platform;
     }
 
-    public String getEventDate() {
+    public Instant getEventDate() {
         return eventDate;
     }
 
-    public void setEventDate(String eventDate) {
+    public void setEventDate(Instant eventDate) {
         this.eventDate = eventDate;
     }
 

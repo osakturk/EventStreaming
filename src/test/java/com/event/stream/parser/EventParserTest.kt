@@ -1,9 +1,11 @@
 import com.event.stream.TestFactory.getEvent
 import com.event.stream.TestFactory.getShow
+import com.event.stream.TestFactory.getTimezoneList
 import com.event.stream.TestFactory.getUser
 import com.event.stream.dto.EventParser
 import com.event.stream.service.EventService
 import com.event.stream.service.ShowService
+import com.event.stream.service.TimezoneService
 import com.event.stream.service.UserService
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.junit.jupiter.api.Assertions.assertEquals
@@ -18,10 +20,11 @@ class EventParserTest {
     private val userService = mock(UserService::class.java)
     private val showService = mock(ShowService::class.java)
     private val eventService = mock(EventService::class.java)
+    private val timezoneService = mock(TimezoneService::class.java)
 
     @BeforeEach
     fun setUp() {
-        eventParser = EventParser(objectMapper, userService, showService, eventService)
+        eventParser = EventParser(objectMapper, userService, showService, eventService, timezoneService)
     }
 
     @Test
@@ -71,6 +74,8 @@ class EventParserTest {
         `when`(userService.addUser(sampleUser)).thenReturn(sampleUser)
         `when`(showService.addShow(sampleShow)).thenReturn(sampleShow)
         `when`(eventService.addEvent(any())).thenReturn(sampleEvent)
+        `when`(eventService.addEvent(any())).thenReturn(sampleEvent)
+        `when`(timezoneService.getTimezoneByCountryCode(any())).thenReturn(getTimezoneList())
 
         // Call the method to be tested
         val result = eventParser.parseJsonFromByteArray(byteArray)

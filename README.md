@@ -86,4 +86,5 @@ For further reference, please consider the following sections:
 
 ### Known Bugs
 * Sometimes the data json object comes wrong so that's why I skipped this part and just added logs 
+* Timezone errors... For example, Russia has different timezone but I don't know which timezone should I use
 

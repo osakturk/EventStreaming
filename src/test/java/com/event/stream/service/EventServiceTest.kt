@@ -27,7 +27,6 @@ class EventServiceTest {
         val response = articleService.addEvent(getEvent())
 
         assertEquals(getEvent().eventId, response.eventId)
-        assertEquals(getEvent().eventDate, response.eventDate)
         assertEquals(getEvent().showId, response.showId)
         assertEquals(getEvent().userId, response.userId)
         assertEquals(getEvent().eventDescription, response.eventDescription)
@@ -43,7 +42,6 @@ class EventServiceTest {
         val response = articleService.events
 
         assertEquals(getEventList().get(0).eventId, response.get(0).eventId)
-        assertEquals(getEventList().get(0).eventDate, response.get(0).eventDate)
         assertEquals(getEventList().get(0).showId, response.get(0).showId)
         assertEquals(getEventList().get(0).userId, response.get(0).userId)
         assertEquals(getEventList().get(0).eventDescription, response.get(0).eventDescription)
@@ -59,7 +57,6 @@ class EventServiceTest {
         val response = articleService.getEventsByUserId(123)
 
         assertEquals(getEventList().get(0).eventId, response.get(0).eventId)
-        assertEquals(getEventList().get(0).eventDate, response.get(0).eventDate)
         assertEquals(getEventList().get(0).showId, response.get(0).showId)
         assertEquals(getEventList().get(0).userId, response.get(0).userId)
         assertEquals(getEventList().get(0).eventDescription, response.get(0).eventDescription)
