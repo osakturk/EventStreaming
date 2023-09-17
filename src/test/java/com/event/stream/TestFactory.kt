@@ -10,7 +10,7 @@ import java.time.Instant
 
 object TestFactory {
     fun getEvent() = Event("eventId",123L, "stream-started", "showId", "sytflix", Instant.now())
-    fun getEventList() = arrayListOf(getEvent())
+    fun getEventList() = arrayListOf(getEvent(), getEvent())
 
     fun getShow() = Show("id","showId","cast", "country","dateAdded","description","director","duration","listedIn",
         "rating",2023,"title", "type","platform")

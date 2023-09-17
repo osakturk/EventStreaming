@@ -61,5 +61,18 @@ class EventServiceTest {
         assertEquals(getEventList().get(0).userId, response.get(0).userId)
         assertEquals(getEventList().get(0).eventDescription, response.get(0).eventDescription)
     }
+
+
+    @Test
+    @Order(3)
+    fun `calculate statics`() {
+        every {
+            eventRepository.findEventByUserIdAndPlatform(any(), any())
+        } returns getEventList()
+
+        val response = articleService.calculateStaticsByUserIdAndPlatform(123, "sytflix")
+
+        assertEquals(0.0, response)
+    }
 }
 
