@@ -48,9 +48,10 @@ For further reference, please consider the following sections:
 
 ### Values
 * Mongo DB is running on 27017 port.
-* Inventory application is running on [8080](http://localhost:8080) port
+* Event Stream application is running on [8080](http://localhost:8181) port
 
 ### Run
+* We get the timezone info list from external api. If you want to run the timezones please check [TimezoneController](src/main/java/com/event/stream/controller/TimezoneController.java)
 * If you don't have mongodb on running your local machine, you just need to run this command:
   ```bash 
     docker compose up -d
