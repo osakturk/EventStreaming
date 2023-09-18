@@ -81,7 +81,9 @@ For further reference, please consider the following sections:
 ### Next Steps
 * Currently I can't get the data live. You should hit the endpoint and you should wait for 20 seconds. Next step would be
   this one. I would get the data second by second and show it on the response
-* My next step would be adding more endpoints to control whole application. After endpoint enhanced,
+* I would add some asynchronous methods i.e: I would be able to save events on background.
+* Another one is creating a property management class. I would manage the url's, log levels etc. easily
+* One of my next step would be adding more endpoints to control whole application. After endpoint enhanced,
   I would create nice UI/UX designed frontend side. It would be separated project and I would use React.js (```v1.1.0```)
 * After creation process of frontend, I would create Authorization and Authentication part. we would be able to
   log in via Jwt bearer token as a result we would create data safety.(```v1.2.0```)
