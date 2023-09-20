@@ -28,26 +28,7 @@ class StreamControllerTest {
         Mockito.`when`(streamService.sytazonData()).thenReturn(Flux.just(getStreamResponseDTO()))
 
         val result = mockMvc
-            .perform(MockMvcRequestBuilders.get("/stream/sytazon")).andReturn()
-        assertEquals(result.response.status, HttpStatus.OK.value())
-    }
-
-
-    @Test
-    fun `get sytflix events`() {
-        Mockito.`when`(streamService.sytflixData()).thenReturn(Flux.just(getStreamResponseDTO()))
-
-        val result = mockMvc
-            .perform(MockMvcRequestBuilders.get("/stream/sytflix")).andReturn()
-        assertEquals(result.response.status, HttpStatus.OK.value())
-    }
-
-    @Test
-    fun `get sysney events`() {
-        Mockito.`when`(streamService.sysneyData()).thenReturn(Flux.just(getStreamResponseDTO()))
-
-        val result = mockMvc
-            .perform(MockMvcRequestBuilders.get("/stream/sysney")).andReturn()
+            .perform(MockMvcRequestBuilders.get("/stream/collect")).andReturn()
         assertEquals(result.response.status, HttpStatus.OK.value())
     }
 }

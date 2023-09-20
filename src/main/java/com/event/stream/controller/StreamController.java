@@ -1,15 +1,21 @@
 package com.event.stream.controller;
 
 
+import com.event.stream.service.CountOperator;
 import com.event.stream.service.StreamService;
 import com.event.stream.dto.StreamingResponseDTO;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.codec.ServerSentEvent;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 import java.time.Duration;
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping("/stream")
@@ -21,18 +27,33 @@ public class StreamController {
         this.streamService = streamService;
     }
 
-    @GetMapping("/sytflix")
-    public ResponseEntity<Flux<StreamingResponseDTO>> showSytflixEvent(){
-        return ResponseEntity.ok(streamService.sytflixData().take(Duration.ofSeconds(20)));
-    }
+    @GetMapping(value = "/collect", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+    public Flux<ServerSentEvent<StreamingResponseDTO>> collectData() {
+        Flux<StreamingResponseDTO> sytflixStream = streamService.sytflixData();
+        Flux<StreamingResponseDTO> sytazonStream = streamService.sytazonData();
+        Flux<StreamingResponseDTO> sysneyStream = streamService.sysneyData();
+        Flux<StreamingResponseDTO> combinedStream = Flux.concat(sytflixStream, sytazonStream, sysneyStream);
 
-    @GetMapping("/sytazon")
-    public ResponseEntity<Flux<StreamingResponseDTO>> showSytazonEvent(){
-        return ResponseEntity.ok(streamService.sytazonData().take(Duration.ofSeconds(20)));
-    }
+        Flux<StreamingResponseDTO> sytacStream = combinedStream
+                .filter(data -> data.getData() != null)
+                .filter(data -> "Sytac".equals(data.getData().getUser().getFirstName()))
+                .take(1); // Take the first occurrence of "Sytac" on any stream
 
-    @GetMapping("/sysney")
-    public ResponseEntity<Flux<StreamingResponseDTO>> showSysneyEvent(){
-        return ResponseEntity.ok(streamService.sysneyData().take(Duration.ofSeconds(20)));
+        Flux<ServerSentEvent<StreamingResponseDTO>> eventStream = combinedStream
+                .map(data -> ServerSentEvent.<StreamingResponseDTO>builder()
+                        .data(data)
+                        .build())
+                .take(Duration.ofSeconds(20));
+
+        Mono<Void> sytacFoundSignal = sytacStream.then(); // Convert the sytacStream to a Mono<Void>
+
+        return Flux.merge(
+                eventStream,
+                sytacStream
+                        .map(data -> ServerSentEvent.<StreamingResponseDTO>builder()
+                                .data(data)
+                                .comment("Sytac found, stopping the stream.")
+                                .build())
+        ).takeUntilOther(sytacFoundSignal); // Stop when "Sytac" is found on any stream
     }
 }

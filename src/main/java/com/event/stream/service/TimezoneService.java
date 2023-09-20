@@ -4,6 +4,7 @@ import com.event.stream.model.TimeZoneResponse;
 import com.event.stream.model.TimezoneInfo;
 import com.event.stream.repository.TimezoneRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -48,7 +49,16 @@ public class TimezoneService {
         return timezoneRepository.saveAll(timeZoneResponse.getZones());
     }
 
+    public List<TimezoneInfo> getAllTimeZones() {
+        return timezoneRepository.findAll();
+    }
+
     public List<TimezoneInfo> getTimezoneByCountryCode(String countryCode){
         return timezoneRepository.findTimezoneInfoByCountryCode(countryCode);
+    }
+
+    @PostConstruct
+    public void init() throws IOException {
+        retrieveAndSaveTimezones();
     }
 }

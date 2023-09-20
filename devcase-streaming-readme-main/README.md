@@ -1,17 +1,4 @@
-```
-   _____       _                   _       
-  / ____|     | |                 (_)      
- | (___  _   _| |_ __ _  ___       _  ___  
-  \___ \| | | | __/ _` |/ __|     | |/ _ \ 
-  ____) | |_| | || (_| | (__   _  | | (_) |
- |_____/ \__, |\__\__,_|\___| (_) |_|\___/ 
-          __/ |                            
-         |___/                              
-
-                     ./work ./share ./relax 
-```
-
-# Sytac Development Challenge #
+# Development Challenge #
 
 Congratulations to making it this far! The next step in the hiring process consist in a small coding assignment.  
 We would like to know you better, and there is no better way than to see how you code!
@@ -25,8 +12,6 @@ complete it. Please let our Sytac HR know how much time you need to complete thi
 > Sytac HR and ask for guidance.
 
 ## Code review/evaluation criteria 🏅 ##
-
-Your submission will be evaluated by Sytac on the following criteria:
 
 + Requirements coverage completeness
 + Correctness of the implementation
