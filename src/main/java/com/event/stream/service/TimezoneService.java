@@ -16,7 +16,7 @@ import java.util.Scanner;
 
 @Service
 public class TimezoneService {
-    private static final String TIMEZONEDB_API_KEY = "6MLY29TZWH0R";
+    private static final String TIMEZONEDB_API_KEY = "YOUR_API_KEY";
 
     private final TimezoneRepository timezoneRepository;
 

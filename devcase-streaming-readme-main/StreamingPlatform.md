@@ -93,6 +93,6 @@ Once the server is running, you will have several endpoints available on your ma
 All the endpoints are protected by username and password (basic auth):
 
 ```
-username = sytac
-password = 4p9g-Dv7T-u8fe-iz6y-SRW2
+username = ****
+password = ****
 ```

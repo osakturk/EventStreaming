@@ -116,8 +116,3 @@ Along with the Mandatory requirements, collect:
     + `[...,{stream-ended, s_01, sytflix, 01_01_2000}, {stream-started, s_01, sytflix, 02_01_2000},...]` => ❌ nothing (no closing stream-ended event)
 
 + the percentage of started stream events out of all events occurred on the `Sytflix` platform
-
-# Questions ❓ #
-
-If you have questions regarding the development, reach out to the Sytac recruiter that is taking care of your hiring process. 
-They reply the message to the most suitable Sytac technical officer that will answer your queries in a timely manner.
