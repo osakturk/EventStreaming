@@ -79,8 +79,6 @@ For further reference, please consider the following sections:
 
 
 ### Next Steps
-* Currently I can't get the data live. You should hit the endpoint and you should wait for 20 seconds. Next step would be
-  this one. I would get the data second by second and show it on the response
 * I would add some asynchronous methods (i.e: I would be able to save events on background.)
 * I can change the return type of the event response from flux to mono
 * I would create a scheduled job for listening event or I would use an event sourcing tool for these events (i.e: AxonServer)
