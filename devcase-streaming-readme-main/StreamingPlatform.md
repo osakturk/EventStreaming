@@ -1,16 +1,3 @@
-```
-   _____       _                   _       
-  / ____|     | |                 (_)      
- | (___  _   _| |_ __ _  ___       _  ___  
-  \___ \| | | | __/ _` |/ __|     | |/ _ \ 
-  ____) | |_| | || (_| | (__   _  | | (_) |
- |_____/ \__, |\__\__,_|\___| (_) |_|\___/ 
-          __/ |                            
-         |___/                              
-
-                     ./work ./share ./relax 
-```
-
 # The video streaming events server 📺 #
 
 The `video streaming events server` exposes near real-time information regarding tv shows and movies streamed by users
@@ -75,13 +62,13 @@ You will need Docker installed on your machine. And then from the terminal type:
 For Intel/AMD x64 based CPUs:  
 
 ```shell
-docker run -p 8080:8080 sytacdocker/video-stream-server:latest
+docker run -p 8080:8080 ****/video-stream-server:latest
 ```
 
 For Arm based CPUs (Apple with M1/M2 chip):  
 
 ```shell
-docker run -p 8080:8080 sytacdocker/video-stream-server-arm:latest
+docker run -p 8080:8080 ****/video-stream-server-arm:latest
 ```
 
 Once the server is running, you will have several endpoints available on your machine:
