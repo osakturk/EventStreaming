@@ -1,11 +1,9 @@
 package com.event.stream.controller;
 
 
-import com.event.stream.service.CountOperator;
-import com.event.stream.service.StreamService;
 import com.event.stream.dto.StreamingResponseDTO;
+import com.event.stream.service.StreamService;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.http.codec.ServerSentEvent;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,8 +12,6 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.time.Duration;
-import java.util.ArrayList;
-import java.util.List;
 
 @RestController
 @RequestMapping("/stream")
