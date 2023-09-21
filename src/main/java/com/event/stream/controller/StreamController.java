@@ -52,7 +52,6 @@ public class StreamController {
                 sytacStream
                         .map(data -> ServerSentEvent.<StreamingResponseDTO>builder()
                                 .data(data)
-                                .comment("Sytac found, stopping the stream.")
                                 .build())
         ).takeUntilOther(sytacFoundSignal); // Stop when "Sytac" is found on any stream
     }
