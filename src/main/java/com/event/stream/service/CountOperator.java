@@ -9,8 +9,8 @@ public class CountOperator {
 
     public static Mono<Void> countOccurrences(Flux<String> stream) {
         return stream
-                .filter(name -> name.equals("Name"))
-                .take(1) // Take the first three occurrences of "Name"
+                .filter(name -> name.equals("Sytac"))
+                .take(1) // Take the first three occurrences of "Sytac"
                 .then();
     }
 }
