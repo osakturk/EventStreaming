@@ -13,7 +13,7 @@ public class WebClientConfig {
         return WebClient.builder()
                 .baseUrl("http://localhost:8080")
                 .defaultHeaders(header -> {
-                    header.setBasicAuth("sytac", "4p9g-Dv7T-u8fe-iz6y-SRW2");
+                    header.setBasicAuth("USERNAME", "PASSWORD");
                     header.setContentType(new MediaType("application", "json"));
                 });
     }
