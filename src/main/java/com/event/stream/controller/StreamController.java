@@ -25,15 +25,15 @@ public class StreamController {
 
     @GetMapping(value = "/collect", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     public Flux<ServerSentEvent<StreamingResponseDTO>> collectData() {
-        Flux<StreamingResponseDTO> sytflixStream = streamService.sytflixData();
-        Flux<StreamingResponseDTO> sytazonStream = streamService.sytazonData();
-        Flux<StreamingResponseDTO> sysneyStream = streamService.sysneyData();
-        Flux<StreamingResponseDTO> combinedStream = Flux.concat(sytflixStream, sytazonStream, sysneyStream);
+        Flux<StreamingResponseDTO> netflixStream = streamService.netflixData();
+        Flux<StreamingResponseDTO> amazonStream = streamService.amazonData();
+        Flux<StreamingResponseDTO> disneyStream = streamService.disneyData();
+        Flux<StreamingResponseDTO> combinedStream = Flux.concat(netflixStream, amazonStream, disneyStream);
 
-        Flux<StreamingResponseDTO> sytacStream = combinedStream
+        Flux<StreamingResponseDTO> filterStream = combinedStream
                 .filter(data -> data.getData() != null)
-                .filter(data -> "Sytac".equals(data.getData().getUser().getFirstName()))
-                .take(1); // Take the first occurrence of "Sytac" on any stream
+                .filter(data -> "Name".equals(data.getData().getUser().getFirstName()))
+                .take(1); // Take the first occurrence of "Name" on any stream
 
         Flux<ServerSentEvent<StreamingResponseDTO>> eventStream = combinedStream
                 .map(data -> ServerSentEvent.<StreamingResponseDTO>builder()
@@ -41,14 +41,14 @@ public class StreamController {
                         .build())
                 .take(Duration.ofSeconds(20));
 
-        Mono<Void> sytacFoundSignal = sytacStream.then(); // Convert the sytacStream to a Mono<Void>
+        Mono<Void> foundSignal = filterStream.then(); // Convert the stream to a Mono<Void>
 
         return Flux.merge(
                 eventStream,
-                sytacStream
+                filterStream
                         .map(data -> ServerSentEvent.<StreamingResponseDTO>builder()
                                 .data(data)
                                 .build())
-        ).takeUntilOther(sytacFoundSignal); // Stop when "Sytac" is found on any stream
+        ).takeUntilOther(foundSignal); // Stop when "Name" is found on any stream
     }
 }
