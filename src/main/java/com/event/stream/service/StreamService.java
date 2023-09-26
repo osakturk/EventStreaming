@@ -18,15 +18,15 @@ public class StreamService {
     }
 
 
-    public Flux<StreamingResponseDTO> sytflixData() {
+    public Flux<StreamingResponseDTO> netflixData() {
         return streamJsonData("/sytflix");
     }
 
-    public Flux<StreamingResponseDTO> sytazonData() {
+    public Flux<StreamingResponseDTO> amazonData() {
         return streamJsonData("/sytazon");
     }
 
-    public Flux<StreamingResponseDTO> sysneyData() {
+    public Flux<StreamingResponseDTO> disneyData() {
         return streamJsonData("/sysney");
     }
 
