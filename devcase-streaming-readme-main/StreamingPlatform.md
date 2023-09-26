@@ -73,9 +73,9 @@ docker run -p 8080:8080 ****/video-stream-server-arm:latest
 
 Once the server is running, you will have several endpoints available on your machine:
 
-- [Sytflix](http://localhost:8080/sytflix) (`http://localhost:8080/sytflix`);
-- [Sytazon](http://localhost:8080/sytazon) (`http://localhost:8080/sytazon`);
-- [Sysney](http://localhost:8080/sysney) (`http://localhost:8080/sysney`).
+- [Netflix](http://localhost:8080/netflix) (`http://localhost:8080/netflix`);
+- [Amazon](http://localhost:8080/amazon) (`http://localhost:8080/amazon`);
+- [Disney](http://localhost:8080/sysney) (`http://localhost:8080/disney`).
 
 All the endpoints are protected by username and password (basic auth):
 

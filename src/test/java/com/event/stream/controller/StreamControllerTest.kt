@@ -23,7 +23,7 @@ class StreamControllerTest {
     lateinit var streamService: StreamService
 
     @Test
-    fun `get sytazon events`() {
+    fun `get amazon events`() {
         Mockito.`when`(streamService.amazonData()).thenReturn(Flux.just(getStreamResponseDTO()))
 
         val result = mockMvc

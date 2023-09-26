@@ -40,19 +40,19 @@ class EventControllerTest {
 
     @Test
     fun `get event list by platform`() {
-        Mockito.`when`(eventService.getEventsByPlatform("sytflix")).thenReturn(arrayListOf())
+        Mockito.`when`(eventService.getEventsByPlatform("netflix")).thenReturn(arrayListOf())
 
         val result = mockMvc
-            .perform(MockMvcRequestBuilders.get("/events/platforms/sytflix")).andReturn()
+            .perform(MockMvcRequestBuilders.get("/events/platforms/netflix")).andReturn()
         assertEquals(result.response.status, HttpStatus.OK.value())
     }
 
     @Test
     fun `get event statics`() {
-        Mockito.`when`(eventService.calculateStaticsByUserIdAndPlatform(23,"sytflix")).thenReturn(Double.MIN_VALUE)
+        Mockito.`when`(eventService.calculateStaticsByUserIdAndPlatform(23,"netflix")).thenReturn(Double.MIN_VALUE)
 
         val result = mockMvc
-            .perform(MockMvcRequestBuilders.get("/events/statics/23/sytflix")).andReturn()
+            .perform(MockMvcRequestBuilders.get("/events/statics/23/netflix")).andReturn()
         assertEquals(result.response.status, HttpStatus.OK.value())
     }
 }
