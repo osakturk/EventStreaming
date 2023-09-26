@@ -2,7 +2,6 @@ package com.event.stream.controller
 
 import com.event.stream.TestFactory.getStreamResponseDTO
 import com.event.stream.service.StreamService
-import com.event.stream.service.UserService
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import org.mockito.Mockito
@@ -24,8 +23,8 @@ class StreamControllerTest {
     lateinit var streamService: StreamService
 
     @Test
-    fun `get sytazon events`() {
-        Mockito.`when`(streamService.sytazonData()).thenReturn(Flux.just(getStreamResponseDTO()))
+    fun `get amazon events`() {
+        Mockito.`when`(streamService.amazonData()).thenReturn(Flux.just(getStreamResponseDTO()))
 
         val result = mockMvc
             .perform(MockMvcRequestBuilders.get("/stream/collect")).andReturn()

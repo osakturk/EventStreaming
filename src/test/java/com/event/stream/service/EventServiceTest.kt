@@ -70,7 +70,7 @@ class EventServiceTest {
             eventRepository.findEventByUserIdAndPlatform(any(), any())
         } returns getEventList()
 
-        val response = articleService.calculateStaticsByUserIdAndPlatform(123, "sytflix")
+        val response = articleService.calculateStaticsByUserIdAndPlatform(123, "netflix")
 
         assertEquals(0.0, response)
     }

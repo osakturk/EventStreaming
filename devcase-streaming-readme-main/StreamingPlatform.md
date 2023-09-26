@@ -1,7 +1,7 @@
 # The video streaming events server 📺 #
 
 The `video streaming events server` exposes near real-time information regarding tv shows and movies streamed by users
-on 3 fictitious streaming platform: `Sytflix`, `Sytazon` and `Sysney`.  
+on 3 fictitious streaming platform: `Netflix`, `Amazon` and `Disney`.  
 Each of the endpoint exposes an infinite stream of server sent events representing either the start of a streaming (`stream-started`) ,
 the end of a streaming (`stream-ended`), liking a show (`show-liked`) or a problem during the streaming of a show
 (`stream-interrupted`).
@@ -73,9 +73,9 @@ docker run -p 8080:8080 ****/video-stream-server-arm:latest
 
 Once the server is running, you will have several endpoints available on your machine:
 
-- [Sytflix](http://localhost:8080/sytflix) (`http://localhost:8080/sytflix`);
-- [Sytazon](http://localhost:8080/sytazon) (`http://localhost:8080/sytazon`);
-- [Sysney](http://localhost:8080/sysney) (`http://localhost:8080/sysney`).
+- [Netflix](http://localhost:8080/netflix) (`http://localhost:8080/netflix`);
+- [Amazon](http://localhost:8080/amazon) (`http://localhost:8080/amazon`);
+- [Disney](http://localhost:8080/sysney) (`http://localhost:8080/disney`).
 
 All the endpoints are protected by username and password (basic auth):
 

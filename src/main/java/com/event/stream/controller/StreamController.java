@@ -1,11 +1,9 @@
 package com.event.stream.controller;
 
 
-import com.event.stream.service.CountOperator;
 import com.event.stream.service.StreamService;
 import com.event.stream.dto.StreamingResponseDTO;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.http.codec.ServerSentEvent;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,8 +12,6 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.time.Duration;
-import java.util.ArrayList;
-import java.util.List;
 
 @RestController
 @RequestMapping("/stream")
@@ -29,15 +25,15 @@ public class StreamController {
 
     @GetMapping(value = "/collect", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     public Flux<ServerSentEvent<StreamingResponseDTO>> collectData() {
-        Flux<StreamingResponseDTO> sytflixStream = streamService.sytflixData();
-        Flux<StreamingResponseDTO> sytazonStream = streamService.sytazonData();
-        Flux<StreamingResponseDTO> sysneyStream = streamService.sysneyData();
-        Flux<StreamingResponseDTO> combinedStream = Flux.concat(sytflixStream, sytazonStream, sysneyStream);
+        Flux<StreamingResponseDTO> netflixStream = streamService.netflixData();
+        Flux<StreamingResponseDTO> amazonStream = streamService.amazonData();
+        Flux<StreamingResponseDTO> disneyStream = streamService.disneyData();
+        Flux<StreamingResponseDTO> combinedStream = Flux.concat(netflixStream, amazonStream, disneyStream);
 
-        Flux<StreamingResponseDTO> sytacStream = combinedStream
+        Flux<StreamingResponseDTO> filterStream = combinedStream
                 .filter(data -> data.getData() != null)
-                .filter(data -> "Sytac".equals(data.getData().getUser().getFirstName()))
-                .take(1); // Take the first occurrence of "Sytac" on any stream
+                .filter(data -> "NameFilter".equals(data.getData().getUser().getFirstName()))
+                .take(1); // Take the first occurrence of "NameFilter" on any stream
 
         Flux<ServerSentEvent<StreamingResponseDTO>> eventStream = combinedStream
                 .map(data -> ServerSentEvent.<StreamingResponseDTO>builder()
@@ -45,14 +41,14 @@ public class StreamController {
                         .build())
                 .take(Duration.ofSeconds(20));
 
-        Mono<Void> sytacFoundSignal = sytacStream.then(); // Convert the sytacStream to a Mono<Void>
+        Mono<Void> foundSignal = filterStream.then(); // Convert the foundSignal to a Mono<Void>
 
         return Flux.merge(
                 eventStream,
-                sytacStream
+                filterStream
                         .map(data -> ServerSentEvent.<StreamingResponseDTO>builder()
                                 .data(data)
                                 .build())
-        ).takeUntilOther(sytacFoundSignal); // Stop when "Sytac" is found on any stream
+        ).takeUntilOther(foundSignal); // Stop when "NameFilter" is found on any stream
     }
 }

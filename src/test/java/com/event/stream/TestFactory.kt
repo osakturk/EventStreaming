@@ -9,7 +9,7 @@ import com.event.stream.model.User
 import java.time.Instant
 
 object TestFactory {
-    fun getEvent() = Event("eventId",123L, "stream-started", "showId", "sytflix", Instant.now())
+    fun getEvent() = Event("eventId",123L, "stream-started", "showId", "netflix", Instant.now())
     fun getEventList() = arrayListOf(getEvent(), getEvent())
 
     fun getShow() = Show("id","showId","cast", "country","dateAdded","description","director","duration","listedIn",
