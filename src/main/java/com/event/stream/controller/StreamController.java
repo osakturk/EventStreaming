@@ -30,7 +30,7 @@ public class StreamController {
         Flux<StreamingResponseDTO> disneyStream = streamService.disneyData();
         Flux<StreamingResponseDTO> combinedStream = Flux.concat(netflixStream, amazonStream, disneyStream);
 
-        Flux<StreamingResponseDTO> sytacStream = combinedStream
+        Flux<StreamingResponseDTO> filterStream = combinedStream
                 .filter(data -> data.getData() != null)
                 .filter(data -> "NameFilter".equals(data.getData().getUser().getFirstName()))
                 .take(1); // Take the first occurrence of "NameFilter" on any stream
@@ -41,11 +41,11 @@ public class StreamController {
                         .build())
                 .take(Duration.ofSeconds(20));
 
-        Mono<Void> sytacFoundSignal = sytacStream.then(); // Convert the sytacStream to a Mono<Void>
+        Mono<Void> sytacFoundSignal = filterStream.then(); // Convert the sytacStream to a Mono<Void>
 
         return Flux.merge(
                 eventStream,
-                sytacStream
+                filterStream
                         .map(data -> ServerSentEvent.<StreamingResponseDTO>builder()
                                 .data(data)
                                 .build())
