@@ -41,7 +41,7 @@ public class StreamController {
                         .build())
                 .take(Duration.ofSeconds(20));
 
-        Mono<Void> sytacFoundSignal = filterStream.then(); // Convert the sytacStream to a Mono<Void>
+        Mono<Void> foundSignal = filterStream.then(); // Convert the sytacStream to a Mono<Void>
 
         return Flux.merge(
                 eventStream,
@@ -49,6 +49,6 @@ public class StreamController {
                         .map(data -> ServerSentEvent.<StreamingResponseDTO>builder()
                                 .data(data)
                                 .build())
-        ).takeUntilOther(sytacFoundSignal); // Stop when "Sytac" is found on any stream
+        ).takeUntilOther(foundSignal); // Stop when "Sytac" is found on any stream
     }
 }
