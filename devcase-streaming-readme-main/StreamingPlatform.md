@@ -1,7 +1,7 @@
 # The video streaming events server 📺 #
 
 The `video streaming events server` exposes near real-time information regarding tv shows and movies streamed by users
-on 3 fictitious streaming platform: `Sytflix`, `Sytazon` and `Sysney`.  
+on 3 fictitious streaming platform: `Netflix`, `Amazon` and `Disney`.  
 Each of the endpoint exposes an infinite stream of server sent events representing either the start of a streaming (`stream-started`) ,
 the end of a streaming (`stream-ended`), liking a show (`show-liked`) or a problem during the streaming of a show
 (`stream-interrupted`).
