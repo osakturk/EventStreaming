@@ -1,3 +1,5 @@
+package com.event.stream.parser
+
 import com.event.stream.TestFactory.getEvent
 import com.event.stream.TestFactory.getShow
 import com.event.stream.TestFactory.getTimezoneList

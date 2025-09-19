@@ -1,16 +1,14 @@
 package com.event.stream.service
 
-import com.event.stream.TestFactory.getShow
-import com.event.stream.TestFactory.getShowList
 import com.event.stream.TestFactory.getUser
 import com.event.stream.TestFactory.getUsersList
-import com.event.stream.repository.ShowRepository
 import com.event.stream.repository.UserRepository
 import io.mockk.every
 import io.mockk.mockk
 import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Order
 import org.junit.jupiter.api.Test
+import org.springframework.data.domain.PageImpl
+import org.springframework.data.domain.PageRequest
 
 class UserServiceTest {
     private var userRepository: UserRepository = mockk()
@@ -18,13 +16,16 @@ class UserServiceTest {
 
     @Test
     fun `get user list`() {
+        val userList = getUsersList()
+        val userPage = PageImpl(userList)
+
         every {
-            userRepository.findAll()
-        } returns getUsersList()
+            userRepository.findAll(PageRequest.of(0, 10))
+        } returns userPage
 
-        val response = userService.users
+        val response = userService.getUsers(0,10)
 
-        assertEquals(getUsersList(), response)
+        assertEquals(userPage, response)
     }
 
     @Test

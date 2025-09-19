@@ -2,6 +2,8 @@ package com.event.stream.service;
 
 import com.event.stream.model.Event;
 import com.event.stream.repository.EventRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,8 +20,8 @@ public class EventService {
         return eventRepository.save(event);
     }
 
-    public List<Event> getEvents() {
-        return eventRepository.findAll();
+    public Page<Event> getEvents(int page, int size) {
+        return eventRepository.findAll(PageRequest.of(page, size));
     }
 
     public List<Event> getEventsByUserId(Long userId) {
@@ -38,18 +40,14 @@ public class EventService {
 
         for (int i = 0; i < events.size() - 1; i++) {
             Event currentEvent = events.get(i);
-            for (int j = 0; j < events.size() - 1; j++) {
-                Event nextEvent = events.get(j);
-                if (nextEvent.equals(currentEvent)) {
-                    continue;
-                }
-                if (currentEvent.getEventDescription().equals("stream-started") &&
-                        nextEvent.getEventDescription().equals("stream-ended") &&
-                        currentEvent.getShowId().equals(nextEvent.getShowId())) {
-                    successfulStreamEvents++;
-                }
-            }
+            Event nextEvent = events.get(i + 1);
 
+            if (currentEvent.getEventDescription().equals("stream-started") &&
+                    nextEvent.getEventDescription().equals("stream-finished") &&
+                    currentEvent.getShowId().equals(nextEvent.getShowId()) &&
+                    currentEvent.getPlatform().equals(nextEvent.getPlatform())) {
+                successfulStreamEvents++;
+            }
         }
         return (double) successfulStreamEvents / totalEvents * 100.0;
 

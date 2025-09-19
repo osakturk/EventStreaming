@@ -17,20 +17,23 @@ public class StreamService {
         this.eventParser = eventParser;
     }
 
+    public Flux<StreamingResponseDTO> allPlatformStreams() {
+        return Flux.merge(sytflixData(), sytazonData(), sysneyData());
+    }
 
-    public Flux<StreamingResponseDTO> sytflixData() {
+    private Flux<StreamingResponseDTO> sytflixData() {
         return streamJsonData("/sytflix");
     }
 
-    public Flux<StreamingResponseDTO> sytazonData() {
+    private Flux<StreamingResponseDTO> sytazonData() {
         return streamJsonData("/sytazon");
     }
 
-    public Flux<StreamingResponseDTO> sysneyData() {
+    private Flux<StreamingResponseDTO> sysneyData() {
         return streamJsonData("/sysney");
     }
 
-    public Flux<StreamingResponseDTO> streamJsonData(String uri) {
+    private Flux<StreamingResponseDTO> streamJsonData(String uri) {
         return webClient.get()
                 .uri(uri) // Replace with your actual stream endpoint
                 .retrieve()

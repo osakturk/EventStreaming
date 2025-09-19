@@ -23,8 +23,8 @@ class StreamControllerTest {
     lateinit var streamService: StreamService
 
     @Test
-    fun `get amazon events`() {
-        Mockito.`when`(streamService.amazonData()).thenReturn(Flux.just(getStreamResponseDTO()))
+    fun `get all streams`() {
+        Mockito.`when`(streamService.allPlatformStreams()).thenReturn(Flux.just(getStreamResponseDTO()))
 
         val result = mockMvc
             .perform(MockMvcRequestBuilders.get("/stream/collect")).andReturn()

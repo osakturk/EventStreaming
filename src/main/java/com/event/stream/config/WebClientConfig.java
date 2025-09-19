@@ -1,5 +1,6 @@
 package com.event.stream.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
@@ -7,14 +8,22 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 @Configuration
 public class WebClientConfig {
+    @Value("${stream.url}")
+    private String streamUrl;
+
+    @Value("${stream.auth.username}")
+    private String username;
+
+    @Value("${stream.auth.password}")
+    private String password;
 
     @Bean
     public WebClient.Builder webClientBuilder() {
         return WebClient.builder()
-                .baseUrl("http://localhost:8080")
+                .baseUrl(streamUrl)
                 .defaultHeaders(header -> {
-                    header.setBasicAuth("sytac", "4p9g-Dv7T-u8fe-iz6y-SRW2");
-                    header.setContentType(new MediaType("application", "json"));
+                    header.setBasicAuth(username, password);
+                    header.setContentType(MediaType.APPLICATION_JSON);
                 });
     }
 

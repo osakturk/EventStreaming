@@ -7,6 +7,7 @@ import org.mockito.Mockito
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.boot.test.mock.mockito.MockBean
+import org.springframework.data.domain.Page
 import org.springframework.http.HttpStatus
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
@@ -22,11 +23,12 @@ class EventControllerTest {
 
     @Test
     fun `get event list`() {
-        Mockito.`when`(eventService.events).thenReturn(arrayListOf())
+        Mockito.`when`(eventService.getEvents(0,10)).thenReturn(Page.empty())
 
         val result = mockMvc
             .perform(MockMvcRequestBuilders.get("/events")).andReturn()
         assertEquals(result.response.status, HttpStatus.OK.value())
+        assertEquals(0, result.response.contentLength)
     }
 
     @Test

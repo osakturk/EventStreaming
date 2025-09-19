@@ -7,6 +7,7 @@ import org.mockito.Mockito
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.boot.test.mock.mockito.MockBean
+import org.springframework.data.domain.Page
 import org.springframework.http.HttpStatus
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
@@ -22,7 +23,7 @@ class UserControllerTest {
 
     @Test
     fun `get show list`() {
-        Mockito.`when`(userService.users).thenReturn(arrayListOf())
+        Mockito.`when`(userService.getUsers(0,10)).thenReturn(Page.empty())
 
         val result = mockMvc
             .perform(MockMvcRequestBuilders.get("/users")).andReturn()

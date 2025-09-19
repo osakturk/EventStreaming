@@ -2,9 +2,11 @@ package com.event.stream.controller;
 
 import com.event.stream.model.Event;
 import com.event.stream.service.EventService;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -20,8 +22,11 @@ public class EventController {
     }
 
     @GetMapping
-    public List<Event> getEvents() {
-        return eventService.getEvents();
+    public Page<Event> getEvents(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size
+    ) {
+        return eventService.getEvents(page, size);
     }
 
     @GetMapping("/users/{userId}")
